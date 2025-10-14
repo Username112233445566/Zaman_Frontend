@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Trophy, Zap, Users } from 'lucide-react';
-import { siteData } from "../data/siteData";
+import { siteData } from "@/data/siteData";
 
 const iconComponents = {
   Trophy,

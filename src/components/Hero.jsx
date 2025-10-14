@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Zap } from 'lucide-react';
-import { siteData } from "../data/siteData";
+import { siteData } from "@/data/siteData";
 
 export default function Hero() {
   const { colors } = siteData;

@@ -1,4 +1,4 @@
-import { siteData } from "../data/siteData";
+import { siteData } from "@/data/siteData";
 
 export default function Footer() {
   const { colors } = siteData;

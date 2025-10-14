@@ -1,7 +1,7 @@
-import "./globals.css";
+// import "./globals.css";
 
 export const metadata = {
-  title: "ZAMAN Studio",
+  title: "ZAMAN studio",
 };
 
 export default function RootLayout({ children }) {

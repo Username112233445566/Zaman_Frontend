@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Code, Send, Zap } from 'lucide-react';
-import { siteData } from "../data/siteData";
+import { siteData } from "@/data/siteData";
 
 const iconComponents = {
   Code,
