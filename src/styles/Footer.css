@@ -1,0 +1,45 @@
+.footer {
+    background: rgb(3, 7, 18);
+    color: rgb(156, 163, 175);
+    padding: 2.5rem 0;
+    text-align: center;
+    border-top: 1px solid rgb(31, 41, 55);
+    font-size: 0.875rem;
+}
+
+.footer-text {
+    margin: 0;
+}
+
+.footer-subtext {
+    margin: 0.5rem 0 0 0;
+    opacity: 0.8;
+}
+
+.footer-heart {
+    color: rgb(79, 70, 229);
+}
+
+/* Адаптивность для Footer */
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 0;
+    }
+
+    .footer-text,
+    .footer-subtext {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 1.5rem 0;
+        font-size: 0.8rem;
+    }
+
+    .footer-text,
+    .footer-subtext {
+        padding: 0 0.5rem;
+    }
+}

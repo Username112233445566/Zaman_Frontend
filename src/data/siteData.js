@@ -40,9 +40,9 @@ export const siteData = {
   ],
 
   contactInfo: [
-    { label: "Email", value: "zaman.studio@example.com", href: "mailto:zaman.studio@example.com" },
+    { label: "Instagram", value: "@zaman.studio", href: "@zaman.studio" },
     { label: "Telegram", value: "@casen0v_1", href: "https://t.me/casen0v_1" },
-    { label: "Телефон", value: "+996 (777) 123-456", href: "tel:+996777123456" },
+    { label: "Телефон", value: "+996 (700) 048-026", href: "tel:+996700048026" },
   ],
 
   technologies: ["nextjs", "react", "django", "python", "typescript", "javascript", "tailwindcss"],

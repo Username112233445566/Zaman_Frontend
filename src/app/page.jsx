@@ -13,8 +13,8 @@ export default function Home() {
       <Hero />
       <Services />
       <Trust />
-      <Contacts />
       <Stacks />
+      <Contacts />
       <Footer />
     </main>
   );
