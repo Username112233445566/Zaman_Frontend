@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Zap, ArrowRight, X, Clock, CheckCircle, Star, Users, Trophy, Code, Smartphone, Globe, Palette, Headphones } from 'lucide-react';
+import { Zap, ArrowRight, X, Clock, CheckCircle, Star, Users, Trophy, Code, Smartphone, Globe, MessageCircle } from 'lucide-react';
 import { siteData } from "@/data/siteData";
 import { useState } from "react";
 import Particles from "react-tsparticles";
@@ -39,8 +39,6 @@ export default function Hero() {
 
     const handleViewPortfolio = () => {
         setShowInfoModal(false);
-        // Здесь можно добавить переход на страницу портфолио
-        // или прокрутку к секции с работами
         alert("Скоро здесь будет наше портфолио!");
     };
 
@@ -53,30 +51,20 @@ export default function Hero() {
                     init={particlesInit}
                     options={{
                         background: {
-                            color: {
-                                value: "transparent",
-                            },
+                            color: { value: "transparent" },
                         },
                         fpsLimit: 120,
                         interactivity: {
                             events: {
-                                onHover: {
-                                    enable: true,
-                                    mode: "repulse",
-                                },
+                                onHover: { enable: true, mode: "repulse" },
                                 resize: true,
                             },
                             modes: {
-                                repulse: {
-                                    distance: 100,
-                                    duration: 0.4,
-                                },
+                                repulse: { distance: 100, duration: 0.4 },
                             },
                         },
                         particles: {
-                            color: {
-                                value: ["#4f46e5", "#10b981", "#6366f1"],
-                            },
+                            color: { value: ["#4f46e5", "#10b981", "#6366f1"] },
                             links: {
                                 color: "#4f46e5",
                                 distance: 150,
@@ -87,29 +75,18 @@ export default function Hero() {
                             move: {
                                 direction: "none",
                                 enable: true,
-                                outModes: {
-                                    default: "bounce",
-                                },
+                                outModes: { default: "bounce" },
                                 random: true,
                                 speed: 1,
                                 straight: false,
                             },
                             number: {
-                                density: {
-                                    enable: true,
-                                    area: 800,
-                                },
+                                density: { enable: true, area: 800 },
                                 value: 40,
                             },
-                            opacity: {
-                                value: 0.5,
-                            },
-                            shape: {
-                                type: "circle",
-                            },
-                            size: {
-                                value: { min: 1, max: 3 },
-                            },
+                            opacity: { value: 0.5 },
+                            shape: { type: "circle" },
+                            size: { value: { min: 1, max: 3 } },
                         },
                         detectRetina: true,
                     }}
@@ -122,6 +99,7 @@ export default function Hero() {
             </div>
 
             <div className="hero-container">
+                {/* Левая часть с текстом */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -139,7 +117,7 @@ export default function Hero() {
                     </motion.div>
 
                     <h1 className="hero-title">
-                        Превращаем
+                        Превращаем{" "}
                         <motion.span
                             className="gradient-text"
                             animate={{
@@ -148,12 +126,12 @@ export default function Hero() {
                             transition={{
                                 duration: 5,
                                 repeat: Infinity,
-                                ease: "linear"
+                                ease: "linear",
                             }}
                         >
                             ваши идеи
-                        </motion.span>
-                        {" "}в реальность
+                        </motion.span>{" "}
+                        в реальность
                     </h1>
 
                     <p className="hero-description">
@@ -198,109 +176,80 @@ export default function Hero() {
                     </div>
                 </motion.div>
 
-                {/* Правая часть с анимированными элементами */}
+                {/* Правая часть с карточкой основателя */}
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="hero-visual"
                 >
-                    <div className="floating-cards">
-                        {/* Карточка с веб-разработкой */}
-                        <motion.div
-                            className="card card-1"
-                            animate={{
-                                y: [-15, 5, -15],
-                                rotate: [-3, 1, -3]
-                            }}
-                            transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                        >
-                            <div className="card-icon">
-                                <Globe size={24} />
+                    <motion.div
+                        className="founder-card"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                        whileHover={{ y: -5 }}
+                    >
+                        <div className="founder-image">
+                            <img
+                                src="/me.jpg"
+                                alt="Касенов Умар"
+                                className="founder-photo"
+                            />
+                            <div className="founder-badge">
+                                <Zap size={16} />
+                                Основатель
                             </div>
-                            <div className="card-content">
-                                <h4>Веб-разработка</h4>
-                                <p>Современные сайты и веб-приложения</p>
-                            </div>
-                        </motion.div>
+                        </div>
 
-                        {/* Карточка с мобильными приложениями */}
-                        <motion.div
-                            className="card card-2"
-                            animate={{
-                                y: [10, -5, 10],
-                                rotate: [2, -1, 2]
-                            }}
-                            transition={{
-                                duration: 5,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 1
-                            }}
-                        >
-                            <div className="card-icon">
-                                <Smartphone size={24} />
-                            </div>
-                            <div className="card-content">
-                                <h4>Мобильные приложения</h4>
-                                <p>iOS и Android разработка</p>
-                            </div>
-                        </motion.div>
+                        <div className="founder-content">
+                            <h3 className="founder-name">Касенов Умар</h3>
+                            <p className="founder-role">Full-stack разработчик & Предприниматель</p>
 
-                        {/* Карточка с дизайном */}
-                        <motion.div
-                            className="card card-3"
-                            animate={{
-                                y: [-5, 12, -5],
-                                rotate: [1, -2, 1]
-                            }}
-                            transition={{
-                                duration: 7,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 2
-                            }}
-                        >
-                            <div className="card-icon">
-                                <Palette size={24} />
+                            <div className="founder-stats">
+                                <div className="founder-stat">
+                                    <span className="stat-value">2+</span>
+                                    <span className="stat-label">лет в IT</span>
+                                </div>
+                                <div className="founder-stat">
+                                    <span className="stat-value">50+</span>
+                                    <span className="stat-label">проектов</span>
+                                </div>
+                                <div className="founder-stat">
+                                    <span className="stat-value">30+</span>
+                                    <span className="stat-label">клиентов</span>
+                                </div>
                             </div>
-                            <div className="card-content">
-                                <h4>UI/UX Дизайн</h4>
-                                <p>Интуитивные интерфейсы</p>
-                            </div>
-                        </motion.div>
 
-                        {/* Карточка с поддержкой */}
-                        <motion.div
-                            className="card card-4"
-                            animate={{
-                                y: [8, -8, 8],
-                                rotate: [-2, 2, -2]
-                            }}
-                            transition={{
-                                duration: 6.5,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 1.5
-                            }}
-                        >
-                            <div className="card-icon">
-                                <Headphones size={24} />
+                            <p className="founder-story">
+                                Начал с фриланса в 2023 году, прошел путь от простых сайтов до сложных IT-систем.
+                                Основал ZAMAN Studio чтобы помогать бизнесу реализовывать цифровые идеи.
+                            </p>
+
+                            <div className="founder-quote">
+                                <div className="quote-icon">"</div>
+                                <p>Верю, что технологии должны решать реальные проблемы бизнеса</p>
                             </div>
-                            <div className="card-content">
-                                <h4>Поддержка</h4>
-                                <p>Техническая поддержка 24/7</p>
+
+                            <div className="founder-links">
+                                <motion.a
+                                    href="https://t.me/casen0v_1"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="social-link"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <MessageCircle size={16} />
+                                    Написать в Telegram
+                                </motion.a>
                             </div>
-                        </motion.div>
-                    </div>
+                        </div>
+                    </motion.div>
                 </motion.div>
             </div>
 
-            {/* Scroll indicator */}
+            {/* Индикатор прокрутки */}
             <motion.div
                 className="scroll-indicator"
                 animate={{ y: [0, 10, 0] }}
@@ -309,7 +258,7 @@ export default function Hero() {
                 <div className="scroll-line"></div>
             </motion.div>
 
-            {/* Модальное окно "Начать проект" */}
+            {/* Модальное окно — заказ проекта */}
             {showOrderModal && (
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -407,7 +356,7 @@ export default function Hero() {
                 </motion.div>
             )}
 
-            {/* Модальное окно "Смотреть работы" */}
+            {/* Модальное окно — информация о проектах */}
             {showInfoModal && (
                 <motion.div
                     initial={{ opacity: 0 }}

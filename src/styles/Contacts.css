@@ -156,7 +156,6 @@
     transform: none !important;
 }
 
-/* Адаптивность для Contacts */
 @media (min-width: 1024px) {
     .contacts-container {
         grid-template-columns: 1fr 1fr;
@@ -218,7 +217,6 @@
     }
 }
 
-/* Стили для красивых уведомлений */
 .custom-notification {
     position: fixed;
     top: 20px;
@@ -292,7 +290,6 @@
     color: rgb(229, 231, 235);
 }
 
-/* Стили для индикатора загрузки */
 .submit-loading {
     display: flex;
     align-items: center;
@@ -314,7 +311,6 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Адаптивность для уведомлений */
 @media (max-width: 768px) {
     .custom-notification {
         top: 10px;

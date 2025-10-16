@@ -8,7 +8,6 @@ export default function Stacks() {
     const { technologies } = siteData;
     const [hoveredTech, setHoveredTech] = useState(null);
 
-    // Простая функция для получения читаемого имени технологии
     const getTechName = (tech) => {
         const techNames = {
             'react': 'React',
@@ -108,7 +107,6 @@ export default function Stacks() {
                                 }}
                             />
 
-                            {/* Тултип показывается только при наведении */}
                             {hoveredTech === stack && (
                                 <motion.div
                                     className="tech-tooltip"
@@ -123,7 +121,6 @@ export default function Stacks() {
                     ))}
                 </div>
 
-                {/* Простые категории без сложной логики */}
                 <motion.div
                     className="tech-categories"
                     initial={{ opacity: 0, y: 20 }}

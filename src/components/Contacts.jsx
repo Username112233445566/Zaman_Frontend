@@ -8,13 +8,12 @@ export default function Contacts() {
     const { contactInfo, colors } = siteData;
     const [formData, setFormData] = useState({
         name: '',
-        phone: '', // Заменили email на phone
+        phone: '',
         message: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // Эффект для автоматического заполнения сообщения при переходе из сервисов
     useEffect(() => {
         const selectedService = sessionStorage.getItem('selectedService');
         if (selectedService) {
@@ -23,7 +22,6 @@ export default function Contacts() {
                 ...prev,
                 message: `Здравствуйте! Я хочу заказать услугу: "${service.name}"\n\n${service.description}\n\nПожалуйста, свяжитесь со мной для обсуждения деталей.`
             }));
-            // Очищаем storage после использования
             sessionStorage.removeItem('selectedService');
         }
     }, []);
@@ -31,21 +29,18 @@ export default function Contacts() {
     const validateForm = () => {
         const newErrors = {};
 
-        // Валидация имени
         if (!formData.name.trim()) {
             newErrors.name = 'Имя обязательно для заполнения';
         } else if (formData.name.trim().length < 2) {
             newErrors.name = 'Имя должно содержать минимум 2 символа';
         }
 
-        // Валидация телефона (заменили email на phone)
         if (!formData.phone.trim()) {
             newErrors.phone = 'Телефон обязателен для заполнения';
         } else if (!/^[\+]?[7-8]?[0-9\s\-\(\)]{10,15}$/.test(formData.phone.replace(/\s/g, ''))) {
             newErrors.phone = 'Введите корректный номер телефона';
         }
 
-        // Валидация сообщения
         if (!formData.message.trim()) {
             newErrors.message = 'Сообщение обязательно для заполнения';
         } else if (formData.message.trim().length < 10) {
@@ -58,7 +53,6 @@ export default function Contacts() {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Форматирование номера телефона
         let formattedValue = value;
         if (name === 'phone') {
             formattedValue = formatPhoneNumber(value);
@@ -77,9 +71,7 @@ export default function Contacts() {
         }
     };
 
-    // Функция для форматирования номера телефона
     const formatPhoneNumber = (value) => {
-        // Удаляем все нецифровые символы
         const numbers = value.replace(/\D/g, '');
 
         if (numbers.length === 0) return '';
@@ -112,7 +104,7 @@ export default function Contacts() {
 
         const text = `🎯 <b>НОВАЯ ЗАЯВКА С САЙТА</b>\n\n` +
             `👤 <b>Имя:</b> ${data.name}\n` +
-            `📞 <b>Телефон:</b> ${data.phone}\n` + // Изменили с Email на Телефон
+            `📞 <b>Телефон:</b> ${data.phone}\n` +
             `💬 <b>Сообщение:</b>\n${data.message}\n\n` +
             `⏰ <b>Время:</b> ${new Date().toLocaleString('ru-RU')}\n` +
             `🌐 <b>Источник:</b> форма контактов`;
@@ -178,9 +170,7 @@ export default function Contacts() {
         }
     };
 
-    // Функция showNotification (оставь свою существующую)
     const showNotification = (message, type = 'success') => {
-        // Твой существующий код уведомлений
         const existingNotification = document.querySelector('.custom-notification');
         if (existingNotification) {
             existingNotification.remove();
@@ -273,7 +263,7 @@ export default function Contacts() {
 
                         <div className="form-group">
                             <input
-                                type="tel" // Изменили type на "tel"
+                                type="tel"
                                 name="phone"
                                 placeholder="Ваш телефон"
                                 className={`form-input ${errors.phone ? 'error' : ''}`}

@@ -34,7 +34,7 @@ export const siteData = {
   ],
 
   achievements: [
-    { num: "100+", text: "Успешных проектов", icon: "Trophy" },
+    { num: "50+", text: "Успешных проектов", icon: "Trophy" },
     { num: "2+", text: "Года на рынке IT", icon: "Zap" },
     { num: "99%", text: "Успешных защит", icon: "Users" },
   ],

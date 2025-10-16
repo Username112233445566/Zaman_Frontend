@@ -14,13 +14,11 @@ export default function Services() {
     const { services, colors } = siteData;
 
     const handleOrderService = (serviceName, serviceDesc) => {
-        // Сохраняем данные о выбранной услуге в sessionStorage
         sessionStorage.setItem('selectedService', JSON.stringify({
             name: serviceName,
             description: serviceDesc
         }));
 
-        // Прокручиваем к форме контактов
         setTimeout(() => {
             const contactsSection = document.getElementById('контакты');
             if (contactsSection) {

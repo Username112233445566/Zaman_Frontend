@@ -61,7 +61,6 @@
     line-height: 1.6;
 }
 
-/* Контейнер для технологий */
 .stacks-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -124,7 +123,6 @@
     pointer-events: none;
 }
 
-/* Категории технологий */
 .tech-categories {
     display: flex;
     justify-content: center;
@@ -169,7 +167,6 @@
     text-align: center;
 }
 
-/* Адаптивность */
 @media (max-width: 1024px) {
     .stacks-container {
         grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));

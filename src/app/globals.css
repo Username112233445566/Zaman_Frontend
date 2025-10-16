@@ -1,4 +1,3 @@
-/* Убрать белые линии вокруг сайта */
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +8,8 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Убирает горизонтальный скролл */
-    background: rgb(17, 24, 39); /* Твой основной цвет фона */
+    overflow-x: hidden;
+    background: rgb(17, 24, 39);
 }
 
 body {
@@ -19,7 +18,6 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* На всякий случай - убираем скроллбар если он белый */
 ::-webkit-scrollbar {
     width: 8px;
 }

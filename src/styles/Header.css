@@ -4,22 +4,20 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(17, 24, 39, 0.6); /* Увеличил прозрачность */
-    backdrop-filter: blur(20px) saturate(180%); /* Усилил blur */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Более прозрачная граница */
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateY(0);
 }
 
-/* Состояние когда проскроллили вниз */
 .header.scrolled {
-    background: rgba(17, 24, 39, 0.8); /* Чуть менее прозрачный при скролле */
+    background: rgba(17, 24, 39, 0.8);
     backdrop-filter: blur(25px) saturate(200%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Анимация скрытия при скролле вниз */
 .header.hide {
     transform: translateY(-100%);
 }
@@ -64,7 +62,7 @@
 
 .nav-link {
     position: relative;
-    color: rgba(229, 231, 235, 0.9); /* Более прозрачный текст */
+    color: rgba(229, 231, 235, 0.9);
     text-decoration: none;
     transition: all 0.3s ease;
     font-size: 0.95rem;
@@ -91,7 +89,7 @@
 }
 
 .header-btn {
-    background: rgba(16, 185, 129, 0.9); /* Более прозрачная кнопка */
+    background: rgba(16, 185, 129, 0.9);
     color: rgb(17, 24, 39);
     padding: 0.5rem 1.5rem;
     border-radius: 0.75rem;
@@ -111,7 +109,6 @@
     transform: translateY(-2px);
 }
 
-/* Адаптивность для Header */
 @media (max-width: 767px) {
     .header-inner {
         padding: 0.75rem 1rem;
@@ -142,7 +139,6 @@
     }
 }
 
-/* Анимация появления при загрузке */
 @keyframes slideDown {
     from {
         transform: translateY(-100%);

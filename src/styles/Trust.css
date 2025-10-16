@@ -76,7 +76,6 @@
     font-weight: 600;
 }
 
-/* Адаптивность для Trust */
 @media (min-width: 768px) {
     .achievements-grid {
         grid-template-columns: repeat(3, 1fr);

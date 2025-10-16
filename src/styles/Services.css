@@ -75,7 +75,6 @@
     color: rgb(17, 24, 39);
 }
 
-/* Адаптивность для Services */
 @media (min-width: 768px) {
     .services-grid {
         grid-template-columns: repeat(3, 1fr);
