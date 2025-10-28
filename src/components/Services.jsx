@@ -1,30 +1,48 @@
 "use client";
 import { motion } from "framer-motion";
-import { Code, Send, Zap } from 'lucide-react';
+import {
+    Code,
+    Send,
+    Zap,
+    Globe,
+    LayoutDashboard,
+    Server,
+    LifeBuoy,
+    BrainCircuit
+} from "lucide-react";
 import { siteData } from "@/data/siteData";
 import "../styles/Services.css";
 
+// ✅ добавили все используемые иконки
 const iconComponents = {
     Code,
     Send,
-    Zap
+    Zap,
+    Globe,
+    LayoutDashboard,
+    Server,
+    LifeBuoy,
+    BrainCircuit
 };
 
 export default function Services() {
     const { services, colors } = siteData;
 
     const handleOrderService = (serviceName, serviceDesc) => {
-        sessionStorage.setItem('selectedService', JSON.stringify({
-            name: serviceName,
-            description: serviceDesc
-        }));
+        sessionStorage.setItem(
+            "selectedService",
+            JSON.stringify({
+                name: serviceName,
+                description: serviceDesc
+            })
+        );
 
         setTimeout(() => {
-            const contactsSection = document.getElementById('контакты');
+            const contactsSection = document.getElementById("контакты");
             if (contactsSection) {
                 contactsSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                    behavior: "smooth",
+                    block: "start"
                 });
             }
         }, 300);
@@ -38,7 +56,9 @@ export default function Services() {
 
             <div className="services-grid">
                 {services.map((item, i) => {
-                    const IconComponent = iconComponents[item.icon];
+                    // ✅ если иконка не найдена — подставляем запасную
+                    const IconComponent = iconComponents[item.icon] || Code;
+
                     return (
                         <motion.div
                             key={i}
@@ -51,9 +71,7 @@ export default function Services() {
                             <div className="service-icon">
                                 <IconComponent size={24} />
                             </div>
-                            <h4 className="service-name">
-                                {item.title}
-                            </h4>
+                            <h4 className="service-name">{item.title}</h4>
                             <p className="service-description">{item.desc}</p>
                             <motion.button
                                 className="service-btn"

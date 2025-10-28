@@ -94,44 +94,17 @@ export default function Contacts() {
     };
 
     const sendToTelegram = async (data) => {
-        const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-        const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
-
-        if (!TELEGRAM_BOT_TOKEN || !CHAT_ID) {
-            console.error('Telegram bot token или chat ID не настроены');
-            return false;
-        }
-
-        const text = `🎯 <b>НОВАЯ ЗАЯВКА С САЙТА</b>\n\n` +
-            `👤 <b>Имя:</b> ${data.name}\n` +
-            `📞 <b>Телефон:</b> ${data.phone}\n` +
-            `💬 <b>Сообщение:</b>\n${data.message}\n\n` +
-            `⏰ <b>Время:</b> ${new Date().toLocaleString('ru-RU')}\n` +
-            `🌐 <b>Источник:</b> форма контактов`;
-
         try {
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            const response = await fetch('/api/sendToTelegram', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: text,
-                    parse_mode: 'HTML'
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
             });
 
             const result = await response.json();
-
-            if (!response.ok) {
-                console.error('Ошибка Telegram API:', result);
-                throw new Error(result.description || 'Ошибка отправки в Telegram');
-            }
-
-            return true;
+            return result.success || false;
         } catch (error) {
-            console.error('Ошибка отправки в Telegram:', error);
+            console.error('Ошибка отправки:', error);
             return false;
         }
     };
