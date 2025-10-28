@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import "../styles/Contacts.css";
 
 export default function Contacts() {
-    const { contactInfo, colors } = siteData;
+    const { contactInfo } = siteData;
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -14,6 +14,7 @@ export default function Contacts() {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    // Автозаполнение для выбранной услуги
     useEffect(() => {
         const selectedService = sessionStorage.getItem('selectedService');
         if (selectedService) {
@@ -26,71 +27,20 @@ export default function Contacts() {
         }
     }, []);
 
+    // Валидация формы
     const validateForm = () => {
         const newErrors = {};
-
-        if (!formData.name.trim()) {
-            newErrors.name = 'Имя обязательно для заполнения';
-        } else if (formData.name.trim().length < 2) {
-            newErrors.name = 'Имя должно содержать минимум 2 символа';
-        }
-
-        if (!formData.phone.trim()) {
-            newErrors.phone = 'Телефон обязателен для заполнения';
-        } else if (!/^[\+]?[7-8]?[0-9\s\-\(\)]{10,15}$/.test(formData.phone.replace(/\s/g, ''))) {
-            newErrors.phone = 'Введите корректный номер телефона';
-        }
-
-        if (!formData.message.trim()) {
-            newErrors.message = 'Сообщение обязательно для заполнения';
-        } else if (formData.message.trim().length < 10) {
-            newErrors.message = 'Сообщение должно содержать минимум 10 символов';
-        }
-
+        if (!formData.name.trim()) newErrors.name = 'Имя обязательно';
+        if (!formData.phone.trim()) newErrors.phone = 'Телефон обязателен';
+        if (!formData.message.trim()) newErrors.message = 'Сообщение обязательно';
         return newErrors;
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
 
-        let formattedValue = value;
-        if (name === 'phone') {
-            formattedValue = formatPhoneNumber(value);
-        }
-
-        setFormData(prev => ({
-            ...prev,
-            [name]: formattedValue
-        }));
-
-        if (errors[name]) {
-            setErrors(prev => ({
-                ...prev,
-                [name]: ''
-            }));
-        }
-    };
-
-    const formatPhoneNumber = (value) => {
-        const numbers = value.replace(/\D/g, '');
-
-        if (numbers.length === 0) return '';
-
-        let formatted = '';
-
-        if (numbers.length <= 1) {
-            formatted = numbers;
-        } else if (numbers.length <= 4) {
-            formatted = `${numbers}`;
-        } else if (numbers.length <= 7) {
-            formatted = `${numbers.slice(0, 1)} ${numbers.slice(1, 4)} ${numbers.slice(4)}`;
-        } else if (numbers.length <= 9) {
-            formatted = `${numbers.slice(0, 1)} ${numbers.slice(1, 4)} ${numbers.slice(4, 7)} ${numbers.slice(7)}`;
-        } else {
-            formatted = `${numbers.slice(0, 1)} ${numbers.slice(1, 4)} ${numbers.slice(4, 7)} ${numbers.slice(7, 9)} ${numbers.slice(9, 11)}`;
-        }
-
-        return formatted;
+        if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
     };
 
     const sendToTelegram = async (data) => {
@@ -98,56 +48,40 @@ export default function Contacts() {
             const response = await fetch('/api/sendToTelegram', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                body: JSON.stringify(data)
             });
-
             const result = await response.json();
             return result.success || false;
-        } catch (error) {
-            console.error('Ошибка отправки:', error);
+        } catch (err) {
+            console.error('Ошибка отправки:', err);
             return false;
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const validationErrors = validateForm();
-        if (Object.keys(validationErrors).length > 0) {
+        if (Object.keys(validationErrors).length) {
             setErrors(validationErrors);
             return;
         }
 
         setIsSubmitting(true);
+        const telegramSuccess = await sendToTelegram(formData);
 
-        try {
-            const telegramSuccess = await sendToTelegram(formData);
-
-            if (telegramSuccess) {
-                showNotification('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.', 'success');
-
-                setFormData({
-                    name: '',
-                    phone: '',
-                    message: ''
-                });
-                setErrors({});
-            } else {
-                showNotification('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь с нами другим способом.', 'error');
-            }
-        } catch (error) {
-            console.error('Ошибка:', error);
-            showNotification('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.', 'error');
-        } finally {
-            setIsSubmitting(false);
+        if (telegramSuccess) {
+            showNotification('Сообщение отправлено! Мы свяжемся с вами.', 'success');
+            setFormData({ name: '', phone: '', message: '' });
+            setErrors({});
+        } else {
+            showNotification('Ошибка при отправке. Попробуйте ещё раз.', 'error');
         }
+        setIsSubmitting(false);
     };
 
     const showNotification = (message, type = 'success') => {
-        const existingNotification = document.querySelector('.custom-notification');
-        if (existingNotification) {
-            existingNotification.remove();
-        }
+        const existing = document.querySelector('.custom-notification');
+        if (existing) existing.remove();
 
         const notification = document.createElement('div');
         notification.className = `custom-notification custom-notification-${type}`;
@@ -158,29 +92,17 @@ export default function Contacts() {
                 <button class="notification-close">×</button>
             </div>
         `;
-
         document.body.appendChild(notification);
-
-        setTimeout(() => {
-            notification.classList.add('show');
-        }, 10);
-
+        setTimeout(() => notification.classList.add('show'), 10);
         notification.querySelector('.notification-close').addEventListener('click', () => {
             closeNotification(notification);
         });
-
-        setTimeout(() => {
-            closeNotification(notification);
-        }, 5000);
+        setTimeout(() => closeNotification(notification), 5000);
     };
 
     const closeNotification = (notification) => {
         notification.classList.remove('show');
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
+        setTimeout(() => notification.remove(), 300);
     };
 
     return (
@@ -188,7 +110,6 @@ export default function Contacts() {
             <h3 className="contacts-title">
                 Свяжитесь с <span className="contacts-title-accent">нами</span>
             </h3>
-
             <div className="contacts-container">
                 <div className="contacts-info">
                     {contactInfo.map((item, i) => (
@@ -236,7 +157,7 @@ export default function Contacts() {
 
                         <div className="form-group">
                             <input
-                                type="tel"
+                                type="text"
                                 name="phone"
                                 placeholder="Ваш телефон"
                                 className={`form-input ${errors.phone ? 'error' : ''}`}
@@ -267,14 +188,7 @@ export default function Contacts() {
                             whileTap={{ scale: 0.98 }}
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? (
-                                <span className="submit-loading">
-                                    <span className="spinner"></span>
-                                    Отправка...
-                                </span>
-                            ) : (
-                                'Отправить сообщение'
-                            )}
+                            {isSubmitting ? 'Отправка...' : 'Отправить сообщение'}
                         </motion.button>
                     </div>
                 </motion.form>
