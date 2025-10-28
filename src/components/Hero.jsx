@@ -192,7 +192,7 @@ export default function Hero() {
                     >
                         <div className="founder-image">
                             <img
-                                src="/me.jpg"
+                                src="/image.png"
                                 alt="Касенов Умар"
                                 className="founder-photo"
                             />
