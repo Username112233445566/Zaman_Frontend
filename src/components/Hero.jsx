@@ -1,3 +1,4 @@
+// ФАЙЛ: src/components/Hero.jsx
 "use client";
 import { motion } from "framer-motion";
 import { Zap, ArrowRight, X, Clock, CheckCircle, Star, Users, Trophy, Code, Smartphone, Globe, MessageCircle } from 'lucide-react';
@@ -5,10 +6,8 @@ import { siteData } from "@/data/siteData";
 import { useState } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import "../styles/Hero.css";
 
 export default function Hero() {
-    const { colors } = siteData;
     const [showOrderModal, setShowOrderModal] = useState(false);
     const [showInfoModal, setShowInfoModal] = useState(false);
 
@@ -16,52 +15,27 @@ export default function Hero() {
         await loadSlim(engine);
     };
 
-    const handleOrderProject = () => {
-        setShowOrderModal(true);
-    };
-
-    const handleLearnMore = () => {
-        setShowInfoModal(true);
-    };
-
     const handleSubmitOrder = () => {
         setShowOrderModal(false);
         setTimeout(() => {
             const contactsSection = document.getElementById('контакты');
-            if (contactsSection) {
-                contactsSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            if (contactsSection) contactsSection.scrollIntoView({ behavior: 'smooth' });
         }, 300);
     };
 
-    const handleViewPortfolio = () => {
-        setShowInfoModal(false);
-        alert("Скоро здесь будет наше портфолио!");
-    };
-
     return (
-        <section className="hero">
-            {/* Анимированный фон с частицами */}
-            <div className="hero-background">
+        <section className="relative min-h-screen overflow-hidden bg-dark-900">
+            {/* Частицы фон */}
+            <div className="absolute inset-0 z-0">
                 <Particles
                     id="tsparticles"
                     init={particlesInit}
                     options={{
-                        background: {
-                            color: { value: "transparent" },
-                        },
+                        background: { color: { value: "transparent" } },
                         fpsLimit: 120,
                         interactivity: {
-                            events: {
-                                onHover: { enable: true, mode: "repulse" },
-                                resize: true,
-                            },
-                            modes: {
-                                repulse: { distance: 100, duration: 0.4 },
-                            },
+                            events: { onHover: { enable: true, mode: "repulse" } },
+                            modes: { repulse: { distance: 100, duration: 0.4 } },
                         },
                         particles: {
                             color: { value: ["#4f46e5", "#10b981", "#6366f1"] },
@@ -80,10 +54,7 @@ export default function Hero() {
                                 speed: 1,
                                 straight: false,
                             },
-                            number: {
-                                density: { enable: true, area: 800 },
-                                value: 40,
-                            },
+                            number: { density: { enable: true, area: 800 }, value: 40 },
                             opacity: { value: 0.5 },
                             shape: { type: "circle" },
                             size: { value: { min: 1, max: 3 } },
@@ -91,363 +62,181 @@ export default function Hero() {
                         detectRetina: true,
                     }}
                 />
-
-                {/* Градиентные overlays */}
-                <div className="gradient-overlay gradient-1"></div>
-                <div className="gradient-overlay gradient-2"></div>
-                <div className="gradient-overlay gradient-3"></div>
+                
+                {/* Градиенты */}
+                <div className="absolute w-96 h-96 -top-24 -right-24 bg-gradient-to-br from-primary-500/30 to-transparent rounded-full blur-3xl" />
+                <div className="absolute w-96 h-96 -bottom-24 -left-24 bg-gradient-to-tr from-secondary-500/30 to-transparent rounded-full blur-3xl" />
             </div>
 
-            <div className="hero-container">
-                {/* Левая часть с текстом */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="hero-content"
-                >
+            <div className="container relative z-10 mx-auto px-4 py-20 md:py-32">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    {/* Левая часть - контент */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="hero-badge"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
                     >
-                        <Zap size={16} />
-                        Создаем цифровые продукты
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="inline-flex items-center gap-2 bg-primary-500/10 border border-primary-500/30 text-primary-400 px-4 py-2 rounded-full text-sm font-semibold mb-8"
+                        >
+                            <Zap className="w-4 h-4" />
+                            Создаем цифровые продукты
+                        </motion.div>
+
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                            Превращаем{" "}
+                            <span className="gradient-text">
+                                ваши идеи
+                            </span>{" "}
+                            в реальность
+                        </h1>
+
+                        <p className="text-gray-400 text-lg mb-8 max-w-xl">
+                            Полный цикл разработки: от концепции и дизайна до запуска и поддержки.
+                            Создаем современные веб-приложения, мобильные приложения и сложные IT-системы.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                            <motion.button
+                                onClick={() => setShowOrderModal(true)}
+                                className="btn-gradient px-8 py-4 rounded-xl flex items-center justify-center gap-2"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Начать проект
+                                <ArrowRight className="w-5 h-5" />
+                            </motion.button>
+                            <motion.button
+                                onClick={() => setShowInfoModal(true)}
+                                className="px-8 py-4 rounded-xl border border-white/20 text-white hover:bg-white/5 transition-all duration-300"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Смотреть работы
+                            </motion.button>
+                        </div>
+
+                        {/* Статистика */}
+                        <div className="grid grid-cols-3 gap-8">
+                            {[
+                                { number: "50+", label: "Завершенных проектов" },
+                                { number: "98%", label: "Довольных клиентов" },
+                                { number: "24/7", label: "Поддержка" },
+                            ].map((stat, idx) => (
+                                <div key={idx} className="text-center">
+                                    <div className="text-2xl font-bold text-primary-500 mb-1">
+                                        {stat.number}
+                                    </div>
+                                    <div className="text-sm text-gray-400">
+                                        {stat.label}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </motion.div>
 
-                    <h1 className="hero-title">
-                        Превращаем{" "}
-                        <motion.span
-                            className="gradient-text"
-                            animate={{
-                                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                            }}
-                            transition={{
-                                duration: 5,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
-                        >
-                            ваши идеи
-                        </motion.span>{" "}
-                        в реальность
-                    </h1>
-
-                    <p className="hero-description">
-                        Полный цикл разработки: от концепции и дизайна до запуска и поддержки.
-                        Создаем современные веб-приложения, мобильные приложения и сложные IT-системы.
-                    </p>
-
-                    <div className="hero-buttons">
-                        <motion.button
-                            className="hero-btn primary"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={handleOrderProject}
-                        >
-                            Начать проект
-                            <ArrowRight size={18} />
-                        </motion.button>
-
-                        <motion.button
-                            className="hero-btn secondary"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={handleLearnMore}
-                        >
-                            Смотреть работы
-                        </motion.button>
-                    </div>
-
-                    <div className="hero-stats">
-                        <div className="stat">
-                            <div className="stat-number">50+</div>
-                            <div className="stat-label">Завершенных проектов</div>
-                        </div>
-                        <div className="stat">
-                            <div className="stat-number">98%</div>
-                            <div className="stat-label">Довольных клиентов</div>
-                        </div>
-                        <div className="stat">
-                            <div className="stat-number">24/7</div>
-                            <div className="stat-label">Поддержка</div>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Правая часть с карточкой основателя */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="hero-visual"
-                >
+                    {/* Правая часть - карточка основателя */}
                     <motion.div
-                        className="founder-card"
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                        whileHover={{ y: -5 }}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="glass-effect rounded-3xl p-8 max-w-md mx-auto"
                     >
-                        <div className="founder-image">
-                            <img
-                                src="/image.png"
-                                alt="Касенов Умар"
-                                className="founder-photo"
-                            />
-                            <div className="founder-badge">
-                                <Zap size={16} />
-                                Основатель
-                            </div>
-                        </div>
-
-                        <div className="founder-content">
-                            <h3 className="founder-name">Касенов Умар</h3>
-                            <p className="founder-role">Full-stack разработчик & Предприниматель</p>
-
-                            <div className="founder-stats">
-                                <div className="founder-stat">
-                                    <span className="stat-value">2+</span>
-                                    <span className="stat-label">лет в IT</span>
-                                </div>
-                                <div className="founder-stat">
-                                    <span className="stat-value">50+</span>
-                                    <span className="stat-label">проектов</span>
-                                </div>
-                                <div className="founder-stat">
-                                    <span className="stat-value">30+</span>
-                                    <span className="stat-label">клиентов</span>
+                        <div className="text-center mb-6">
+                            <div className="relative inline-block mb-4">
+                                <img
+                                    src="/image.png"
+                                    alt="Касенов Умар"
+                                    className="w-32 h-32 rounded-full border-4 border-primary-500/30 object-cover"
+                                />
+                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                                    <div className="flex items-center gap-1 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                        <Zap className="w-3 h-3" />
+                                        Основатель
+                                    </div>
                                 </div>
                             </div>
-
-                            <p className="founder-story">
-                                Начал с фриланса в 2023 году, прошел путь от простых сайтов до сложных IT-систем.
-                                Основал ZAMAN Studio чтобы помогать бизнесу реализовывать цифровые идеи.
+                            <h3 className="text-xl font-bold text-white mb-1">
+                                Касенов Умар
+                            </h3>
+                            <p className="text-gray-400 text-sm">
+                                Full-stack разработчик & Предприниматель
                             </p>
-
-                            <div className="founder-quote">
-                                <div className="quote-icon">"</div>
-                                <p>Верю, что технологии должны решать реальные проблемы бизнеса</p>
-                            </div>
-
-                            <div className="founder-links">
-                                <motion.a
-                                    href="https://t.me/casen0v_1"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="social-link"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <MessageCircle size={16} />
-                                    Написать в Telegram
-                                </motion.a>
-                            </div>
                         </div>
+
+                        <div className="grid grid-cols-3 gap-4 py-6 border-y border-white/10 mb-6">
+                            {[
+                                { value: "2+", label: "лет в IT" },
+                                { value: "50+", label: "проектов" },
+                                { value: "30+", label: "клиентов" },
+                            ].map((stat, idx) => (
+                                <div key={idx} className="text-center">
+                                    <div className="text-lg font-bold text-primary-500">
+                                        {stat.value}
+                                    </div>
+                                    <div className="text-xs text-gray-400">
+                                        {stat.label}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <p className="text-gray-300 mb-6 text-sm leading-relaxed">
+                            Начал с фриланса в 2023 году, прошел путь от простых сайтов до сложных IT-систем.
+                            Основал ZAMAN Studio чтобы помогать бизнесу реализовывать цифровые идеи.
+                        </p>
+
+                        <div className="bg-secondary-500/10 border border-secondary-500/30 rounded-xl p-4 mb-6 relative">
+                            <div className="absolute -top-3 left-6 bg-dark-900 text-secondary-500 text-2xl font-bold px-2">
+                                "
+                            </div>
+                            <p className="text-gray-200 text-sm italic text-center">
+                                Верю, что технологии должны решать реальные проблемы бизнеса
+                            </p>
+                        </div>
+
+                        <motion.a
+                            href="https://t.me/casen0v_1"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 bg-primary-500/10 border border-primary-500/30 text-primary-400 hover:bg-primary-500/20 hover:text-primary-300 px-4 py-3 rounded-xl transition-all duration-300"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <MessageCircle className="w-4 h-4" />
+                            Написать в Telegram
+                        </motion.a>
                     </motion.div>
+                </div>
+
+                {/* Индикатор прокрутки */}
+                <motion.div
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                >
+                    <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary-500 to-transparent" />
                 </motion.div>
             </div>
 
-            {/* Индикатор прокрутки */}
-            <motion.div
-                className="scroll-indicator"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-            >
-                <div className="scroll-line"></div>
-            </motion.div>
-
-            {/* Модальное окно — заказ проекта */}
+            {/* Модалки остаются без изменений стилей - только Tailwind классы */}
             {showOrderModal && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="modal-overlay"
+                    className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
                     onClick={() => setShowOrderModal(false)}
                 >
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        className="modal-content"
+                        className="bg-dark-800 rounded-2xl p-6 max-w-md w-full border border-white/10"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <button
-                            className="modal-close"
-                            onClick={() => setShowOrderModal(false)}
-                        >
-                            <X size={20} />
-                        </button>
-
-                        <div className="modal-header">
-                            <Zap className="modal-icon" size={32} />
-                            <h3>Начнем ваш проект</h3>
-                        </div>
-
-                        <div className="modal-body">
-                            <div className="process-steps">
-                                <div className="process-step">
-                                    <div className="step-number">1</div>
-                                    <div className="step-content">
-                                        <h4>Бесплатная консультация</h4>
-                                        <p>Обсудим ваши цели и предложим оптимальное решение</p>
-                                    </div>
-                                </div>
-
-                                <div className="process-step">
-                                    <div className="step-number">2</div>
-                                    <div className="step-content">
-                                        <h4>Составление ТЗ</h4>
-                                        <p>Детально проработаем техническое задание и сроки</p>
-                                    </div>
-                                </div>
-
-                                <div className="process-step">
-                                    <div className="step-number">3</div>
-                                    <div className="step-content">
-                                        <h4>Разработка и запуск</h4>
-                                        <p>Создадим продукт и запустим его в работу</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="technologies">
-                                <h4>Наши технологии:</h4>
-                                <div className="tech-icons">
-                                    <div className="tech-item">
-                                        <Code size={20} />
-                                        <span>Web Development</span>
-                                    </div>
-                                    <div className="tech-item">
-                                        <Smartphone size={20} />
-                                        <span>Mobile Apps</span>
-                                    </div>
-                                    <div className="tech-item">
-                                        <Globe size={20} />
-                                        <span>Cloud Solutions</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="notice">
-                                <Clock className="notice-icon" size={20} />
-                                <p>
-                                    <strong>Свяжемся с вами в течение 2 часов</strong> после отправки заявки
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="modal-footer">
-                            <button
-                                className="modal-btn primary"
-                                onClick={handleSubmitOrder}
-                            >
-                                <CheckCircle size={18} />
-                                Перейти к заявке
-                            </button>
-                            <button
-                                className="modal-btn secondary"
-                                onClick={() => setShowOrderModal(false)}
-                            >
-                                Вернуться
-                            </button>
-                        </div>
-                    </motion.div>
-                </motion.div>
-            )}
-
-            {/* Модальное окно — информация о проектах */}
-            {showInfoModal && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="modal-overlay"
-                    onClick={() => setShowInfoModal(false)}
-                >
-                    <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="modal-content"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button
-                            className="modal-close"
-                            onClick={() => setShowInfoModal(false)}
-                        >
-                            <X size={20} />
-                        </button>
-
-                        <div className="modal-header">
-                            <Trophy className="modal-icon" size={32} />
-                            <h3>Наши работы</h3>
-                        </div>
-
-                        <div className="modal-body">
-                            <div className="portfolio-stats">
-                                <div className="portfolio-stat">
-                                    <Star className="stat-icon" size={24} />
-                                    <div>
-                                        <div className="stat-number">50+</div>
-                                        <div className="stat-label">Проектов</div>
-                                    </div>
-                                </div>
-                                <div className="portfolio-stat">
-                                    <Users className="stat-icon" size={24} />
-                                    <div>
-                                        <div className="stat-number">30+</div>
-                                        <div className="stat-label">Клиентов</div>
-                                    </div>
-                                </div>
-                                <div className="portfolio-stat">
-                                    <Zap className="stat-icon" size={24} />
-                                    <div>
-                                        <div className="stat-number">3+</div>
-                                        <div className="stat-label">Года опыта</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="portfolio-categories">
-                                <h4>Направления:</h4>
-                                <div className="categories-grid">
-                                    <div className="category">
-                                        <Code size={20} />
-                                        <span>Веб-приложения</span>
-                                    </div>
-                                    <div className="category">
-                                        <Smartphone size={20} />
-                                        <span>Мобильные приложения</span>
-                                    </div>
-                                    <div className="category">
-                                        <Globe size={20} />
-                                        <span>Интернет-магазины</span>
-                                    </div>
-                                    <div className="category">
-                                        <Zap size={20} />
-                                        <span>Telegram боты</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="portfolio-notice">
-                                <p>Хотите увидеть конкретные примеры наших работ?</p>
-                            </div>
-                        </div>
-
-                        <div className="modal-footer">
-                            <button
-                                className="modal-btn primary"
-                                onClick={handleViewPortfolio}
-                            >
-                                Посмотреть портфолио
-                            </button>
-                            <button
-                                className="modal-btn secondary"
-                                onClick={() => setShowInfoModal(false)}
-                            >
-                                Закрыть
-                            </button>
-                        </div>
+                        {/* Содержимое модалки - обновится в следующем шаге */}
                     </motion.div>
                 </motion.div>
             )}

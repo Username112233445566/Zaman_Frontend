@@ -1,15 +1,15 @@
-import { siteData } from "@/data/siteData";
-import "../styles/Footer.css";
-
+// ФАЙЛ: src/components/Footer.jsx
 export default function Footer() {
-    const { colors } = siteData;
-
     return (
-        <footer className="footer">
-            <p className="footer-text">© 2025 ZAMAN Studio. Все права защищены.</p>
-            <p className="footer-subtext">
-                Разработано с <span className="footer-heart">любовью</span> и кодом.
-            </p>
+        <footer className="py-8 bg-dark-950 border-t border-white/10">
+            <div className="container mx-auto px-4 text-center">
+                <p className="text-gray-400 mb-2">
+                    © 2025 ZAMAN Studio. Все права защищены.
+                </p>
+                <p className="text-gray-500 text-sm">
+                    Разработано с <span className="text-primary-500">любовью</span> и кодом.
+                </p>
+            </div>
         </footer>
     );
 }

@@ -42,4 +42,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-cat
+code.md
+project_code_dump.txt
