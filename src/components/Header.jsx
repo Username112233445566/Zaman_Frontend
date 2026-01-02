@@ -1,4 +1,3 @@
-// ФАЙЛ: src/components/Header.jsx
 "use client";
 import { motion } from "framer-motion";
 import { siteData } from "@/data/siteData";
@@ -50,8 +49,8 @@ export default function Header() {
                         transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     >
                         <h1 className="text-2xl font-bold">
-                            <span className="text-primary-500">ZAMAN</span>
-                            <span className="text-secondary-500">Studio</span>
+                            <span className="text-primary-500">Netx</span>
+                            <span className="text-secondary-500">Bit</span>
                         </h1>
                     </motion.div>
 

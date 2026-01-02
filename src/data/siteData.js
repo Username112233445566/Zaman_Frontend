@@ -1,74 +1,76 @@
 export const siteData = {
   colors: {
-    primary: '#4c51bf',
-    secondary: '#10b981',
-    bgDark: '#1a1a1a',
-    bgCard: '#262626',
-    textLight: '#e5e7eb',
-    textMuted: '#a1a1aa'
+    primary: '#00D1FF',
+    secondary: '#7B61FF',
+    accent: '#FF4D8D',
+    bgDark: '#0A0A0F',
+    bgCard: '#15151E',
+    textLight: '#F0F0F0',
+    textMuted: '#888888'
   },
   
   company: {
-    name: "ZAMANStudio",
-    email: "zaman.studio@example.com",
-    telegram: "@casen0v_1",
-    phone: "+996 (777) 123-456"
+    name: "NexBit",
+    slogan: "Цифровые решения для роста бизнеса",
+    email: "hello@nexbit.dev",
+    telegram: "@nexbit_dev",
+    phone: "+996 (700) 048-026"
   },
 
-    services: [
-        {
-            title: "Веб-сайты & Приложения",
-            desc: "От лендингов до сложных SaaS-платформ на Next.js и React.",
-            icon: "Code"
-        },
-        {
-            title: "Telegram & Чат-боты",
-            desc: "Автоматизация процессов, интеграции и удобные пользовательские интерфейсы.",
-            icon: "Send"
-        },
-        {
-            title: "Дипломные & Курсовые работы",
-            desc: "Полная разработка IT-проектов для студентов с оформлением и защитой.",
-            icon: "Zap"
-        },
-        {
-            title: "Цифровой маркетинг",
-            desc: "Продвижение брендов в интернете: реклама, SEO, контент и аналитика для роста продаж.",
-            icon: "Globe"
-        },
-        {
-            title: "UI/UX Дизайн",
-            desc: "Создание интуитивных интерфейсов и прототипов в Figma — от идей до готовых макетов.",
-            icon: "LayoutDashboard"
-        },
-        {
-            title: "DevOps & Хостинг",
-            desc: "Развёртывание и поддержка проектов: настройка серверов, доменов и CI/CD.",
-            icon: "Server"
-        },
-        {
-            title: "Поддержка и сопровождение",
-            desc: "Регулярные обновления, оптимизация скорости и устранение ошибок для ваших проектов.",
-            icon: "LifeBuoy"
-        },
-        {
-            title: "IT-Консалтинг",
-            desc: "Помощь в выборе технологий, разработке архитектуры и стратегии цифрового роста.",
-            icon: "BrainCircuit"
-        },
-    ],
+  services: [
+    {
+      title: "Веб-приложения",
+      desc: "Современные SaaS-платформы, CRM, ERP и корпоративные порталы под ключ.",
+      icon: "Code"
+    },
+    {
+      title: "Мобильные приложения",
+      desc: "Кроссплатформенные React Native приложения для iOS и Android.",
+      icon: "Smartphone"
+    },
+    {
+      title: "E-commerce",
+      desc: "Интернет-магазины и маркетплейсы с интеграцией платежей и аналитикой.",
+      icon: "ShoppingCart"
+    },
+    {
+      title: "Telegram боты",
+      desc: "Автоматизация бизнес-процессов через Telegram: от чат-ботов до мини-приложений.",
+      icon: "Send"
+    },
+    {
+      title: "UI/UX Дизайн",
+      desc: "Создание интерфейсов, которые нравятся пользователям и увеличивают конверсию.",
+      icon: "LayoutDashboard"
+    },
+    {
+      title: "DevOps & Хостинг",
+      desc: "Развертывание, мониторинг и поддержка высоконагруженных систем.",
+      icon: "Server"
+    },
+    {
+      title: "Технический аудит",
+      desc: "Анализ существующих IT-систем и рекомендации по оптимизации.",
+      icon: "Search"
+    },
+    {
+      title: "IT-консалтинг",
+      desc: "Помощь в выборе технологий, планировании архитектуры и бюджета.",
+      icon: "BrainCircuit"
+    }
+  ],
 
   achievements: [
-    { num: "50+", text: "Успешных проектов", icon: "Trophy" },
-    { num: "2+", text: "Года на рынке IT", icon: "Zap" },
-    { num: "99%", text: "Успешных защит", icon: "Users" },
+    { num: "50+", text: "Реализованных проектов", icon: "Trophy" },
+    { num: "98%", text: "Довольных клиентов", icon: "Users" },
+    { num: "2+", text: "Года на рынке", icon: "Zap" },
   ],
 
   contactInfo: [
-    { label: "Instagram", value: "@umar_kasenov_official", href: "https://www.instagram.com/umar_kasenov_official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
-    { label: "Telegram", value: "@casen0v_1", href: "https://t.me/casen0v_1" },
-    { label: "Телефон", value: "+996 (700) 048-026", href: "tel:+996700048026" },
+    { label: "Telegram", value: "@nexbit_dev", href: "https://t.me/nexbit_dev" },
+    { label: "WhatsApp", value: "+996 700 048 026", href: "https://wa.me/996700048026" },
+    { label: "Email", value: "hello@nexbit.dev", href: "mailto:hello@nexbit.dev" },
   ],
 
-  technologies: ["nextjs", "react", "django", "python", "typescript", "javascript", "tailwindcss"],
+  technologies: ["nextjs", "react", "typescript", "nodejs", "tailwind", "graphql", "docker"],
 };

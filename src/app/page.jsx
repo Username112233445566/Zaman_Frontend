@@ -1,20 +1,25 @@
-// ФАЙЛ: src/app/page.jsx
-import Header from "../components/Header";
-import Hero from "../components/Hero";
-import Services from "../components/Services";
-import Trust from "../components/Trust";
-import Contacts from "../components/Contacts";
-import Stacks from "../components/Stacks";
-import Footer from "../components/Footer";
+import Header from "@/components/Header";
+import NexbitHero from "@/components/NexbitHero";
+import NexbitApproach from "@/components/NexbitApproach";
+import Services from "@/components/Services";
+import Portfolio from "@/components/Portfolio";
+import Process from "@/components/Process";
+import Stacks from "@/components/Stacks";
+import Trust from "@/components/Trust";
+import Contacts from "@/components/Contacts";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col bg-dark-900">
+    <main className="min-h-screen flex flex-col bg-nexbit-dark overflow-hidden">
       <Header />
-      <Hero />
+      <NexbitHero />
+      <NexbitApproach />
       <Services />
-      <Trust />
+      <Portfolio />
+      <Process />
       <Stacks />
+      <Trust />
       <Contacts />
       <Footer />
     </main>
