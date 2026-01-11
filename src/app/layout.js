@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata = {
-  title: "NexBit - Цифровые решения для роста бизнеса",
+  title: "NextBit - Цифровые решения для роста бизнеса",
   description: "Разрабатываем и внедряем IT-решения, которые решают реальные бизнес-задачи и приносят измеримый результат.",
 };
 

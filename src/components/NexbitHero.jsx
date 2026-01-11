@@ -271,11 +271,11 @@ export default function NexbitHero() {
             </div>
 
             {/* Плавающие элементы */}
-            <motion.div
+            {/* <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-r from-nexbit-primary/5 to-nexbit-accent/5 rounded-2xl border border-nexbit-primary/20 backdrop-blur-sm"
-            />
+              className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-r from-nexbit-primary/5 to-nexbit-accent/5 rounded-2xl border border-nexbit-primary/20 backdrop-blur-sm" */}
+            {/* /> */}
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
@@ -285,16 +285,12 @@ export default function NexbitHero() {
         </div>
 
         {/* Индикатор прокрутки */}
-        <motion.div
+        {/* <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="flex flex-col items-center">
-            <div className="text-xs text-gray-500 mb-2">Листайте вниз</div>
-            <div className="w-px h-12 bg-gradient-to-b from-nexbit-primary via-nexbit-secondary to-transparent" />
-          </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
